@@ -31,11 +31,11 @@ public class GameField {
         }
     }
 
-    public ArrayList<Ship> getSheeps() {
+    public ArrayList<Ship> getShips() {
         return ships;
     }
 
-    public boolean isSheepsDestroyed() {
+    public boolean isShipsDestroyed() {
         for (Ship ship : this.ships) {
             if (!ship.isDestroyed()) {
                 return false;
@@ -50,7 +50,7 @@ public class GameField {
      * 
      * @param ships ArrayList<Ship>
      */
-    public void putSheeps(ArrayList<Ship> ships) {
+    public void putShips(ArrayList<Ship> ships) {
         Random random = new Random();
         this.ships = ships;
         
@@ -107,7 +107,7 @@ public class GameField {
 
     public boolean fire(int x, int y) throws AlreadyFallenException {
         Cell cell = this.cells[x-1][y-1];
-        Ship ship = cell.getSheep();
+        Ship ship = cell.getShip();
 
         if (cell.isHit()) {
             throw new AlreadyFallenException("Вы уже нанесли удар по этим координатам.");
@@ -117,7 +117,7 @@ public class GameField {
         cell.setHit(true);
 
         // Если есть корабль - нужно зафиксировать урон
-        if (cell.hasSheep()) {
+        if (cell.hasShip()) {
             ship.setDamage(cell);
             return true;
         }
@@ -157,7 +157,7 @@ public class GameField {
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
-                Ship ship = cell.getSheep();
+                Ship ship = cell.getShip();
 
                 if (null != ship) {
                     if (ship.isDamaged(cell)) {
@@ -189,7 +189,7 @@ public class GameField {
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
-                Ship ship = cell.getSheep();
+                Ship ship = cell.getShip();
 
                 if (null != ship && ship.isDamaged(cell)) {
                     System.out.print(" x ");
@@ -225,12 +225,12 @@ public class GameField {
                 }
 
                 // Проверяем клетку после корабля
-                if (x > 1 && cells[xI - 1][yI].hasSheep()) {
+                if (x > 1 && cells[xI - 1][yI].hasShip()) {
                     return false;
                 }
 
                 // Проверяем клетку перед кораблем
-                if (x + size <= GameField.X_MAX && cells[xI + size][yI].hasSheep()) {
+                if (x + size <= GameField.X_MAX && cells[xI + size][yI].hasShip()) {
                     return false;
                 }
 
@@ -242,12 +242,12 @@ public class GameField {
                     }
 
                     // Проверяем клетки сверху
-                    if (y < GameField.Y_MAX && cells[i][yI + 1].hasSheep()) {
+                    if (y < GameField.Y_MAX && cells[i][yI + 1].hasShip()) {
                         return false;
                     }
 
                     // Проверяем клетки снизу
-                    if (y > 1 && cells[i][yI - 1].hasSheep()) {
+                    if (y > 1 && cells[i][yI - 1].hasShip()) {
                         return false;
                     }
                 }
@@ -255,7 +255,7 @@ public class GameField {
                 // Помещаем корабль на игровое поле
                 for (int i = xI; i < size + xI; i++) {
                     // Помечаем клетку занятой кораблем
-                    cells[i][yI].setSheep(ship);
+                    cells[i][yI].setShip(ship);
 
                     // Клетку сверху помеяаем недоступной
                     if (y < GameField.Y_MAX) {
@@ -286,12 +286,12 @@ public class GameField {
                 }
 
                 // Проверяем что конец корабля не попадает в другой
-                if (y > 1 && cells[xI][yI - 1].hasSheep()) {
+                if (y > 1 && cells[xI][yI - 1].hasShip()) {
                     return false;
                 }
 
                 // Проверяем что нос корабля не попадает в другой
-                if (y + size < GameField.Y_MAX && cells[xI][yI + size].hasSheep()) {
+                if (y + size < GameField.Y_MAX && cells[xI][yI + size].hasShip()) {
                     return false;
                 }
 
@@ -303,12 +303,12 @@ public class GameField {
                     }
 
                     // Ячейки справа не должны содержать кораблей
-                    if (x < GameField.X_MAX && cells[xI + 1][i].hasSheep()) {
+                    if (x < GameField.X_MAX && cells[xI + 1][i].hasShip()) {
                         return false;
                     }
 
                     // Ячейки слева не должны содержать кораблей
-                    if (x > 1 && cells[xI - 1][i].hasSheep()) {
+                    if (x > 1 && cells[xI - 1][i].hasShip()) {
                         return false;
                     }
                 }
@@ -316,7 +316,7 @@ public class GameField {
                 // Размещаем корабль на игровом поле
                 for (int i = yI; i < size + yI; i++) {
                     // Помечаем саму ячейка, что она содержит корабль
-                    cells[xI][i].setSheep(ship);
+                    cells[xI][i].setShip(ship);
 
                     // Помечаем смежную ячейку справа
                     if (x < GameField.X_MAX) {

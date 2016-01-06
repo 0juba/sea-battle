@@ -28,8 +28,8 @@ public class GameEnv {
         this.aiGameField = new GameField();
 
         // Заполняем их короблями
-        this.userGameField.putSheeps(this.createSheeps());
-        this.aiGameField.putSheeps(this.createSheeps());
+        this.userGameField.putShips(this.createShips());
+        this.aiGameField.putShips(this.createShips());
     }
 
     public PlayerHuman getPlayerHuman() {
@@ -48,7 +48,7 @@ public class GameEnv {
         return aiGameField;
     }
 
-    private ArrayList<Ship> createSheeps() {
+    private ArrayList<Ship> createShips() {
         ArrayList<Ship> ships = new ArrayList<>();
 
         // Size 1, allow 4

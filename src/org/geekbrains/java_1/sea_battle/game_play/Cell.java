@@ -38,7 +38,7 @@ public class Cell {
      * @return boolean
      */
     public boolean isFree() {
-        return !this.isNeighboring() && !this.hasSheep();
+        return !this.isNeighboring() && !this.hasShip();
     }
 
     /**
@@ -53,12 +53,12 @@ public class Cell {
         this.neighboring = true;
     }
 
-    public Ship getSheep() {
+    public Ship getShip() {
         return ship;
     }
 
-    public void setSheep(Ship ship) {
-        if (!this.hasSheep()) {
+    public void setShip(Ship ship) {
+        if (!this.hasShip()) {
             this.ship = ship;
         }
     }
@@ -67,7 +67,7 @@ public class Cell {
      * Ячейка содержит сектор корабля
      * @return boolean
      */
-    public boolean hasSheep() {
+    public boolean hasShip() {
         return this.ship == null;
     }
 

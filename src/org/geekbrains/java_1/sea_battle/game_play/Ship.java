@@ -52,7 +52,7 @@ public class Ship {
      * @param position Cell
      * @return Ship
      */
-    public Ship placeSheep(Cell position) {
+    public Ship placeShip(Cell position) {
         this.position.put(position, false);
 
         return this;

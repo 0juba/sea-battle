@@ -55,7 +55,7 @@ public class GamePlay {
                                 System.out.println("Есть! Попадание!");
 
                                 // Проверим, вдруг все убиты, пора закругляться
-                                if (gameEnv.getAiGameField().isSheepsDestroyed()) {
+                                if (gameEnv.getAiGameField().isShipsDestroyed()) {
                                     System.out.println("Поздравляем! Вы победили!");
                                     choice = 5;
                                 }
@@ -68,7 +68,7 @@ public class GamePlay {
                                         System.out.println("Ваш корабль подбит!");
 
                                         // Победа компьютера
-                                        if (gameEnv.getUserGameField().isSheepsDestroyed()) {
+                                        if (gameEnv.getUserGameField().isShipsDestroyed()) {
                                             System.out.println("Вы проиграли! Попытайте счастье в другой раз");
                                             choice = 5;
                                             break;
