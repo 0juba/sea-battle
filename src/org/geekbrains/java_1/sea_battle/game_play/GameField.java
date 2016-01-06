@@ -159,7 +159,7 @@ public class GameField {
                 Cell cell = this.cells[i][j];
                 Sheep sheep = cell.getSheep();
 
-                if (cell.hasSheep()) {
+                if (null != sheep) {
                     if (sheep.isDamaged(cell)) {
                         System.out.print(" x ");
                     } else {
@@ -191,7 +191,7 @@ public class GameField {
                 Cell cell = this.cells[i][j];
                 Sheep sheep = cell.getSheep();
 
-                if (cell.hasSheep() && sheep.isDamaged(cell)) {
+                if (null != sheep && sheep.isDamaged(cell)) {
                     System.out.print(" x ");
                 } else {
                     System.out.print(" . ");
