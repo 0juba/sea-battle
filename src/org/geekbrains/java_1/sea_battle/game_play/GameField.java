@@ -146,6 +146,7 @@ public class GameField {
      * Метод выводит на экран собственное игровое поле
      */
     public void printOwnField() {
+        System.out.print("    ");
         for (int i = 0; i < GameField.X_MAX; i++) {
             System.out.print(" " + Integer.toString(i) + (i + 1 < 10 ? " " : ""));
         }
@@ -153,7 +154,7 @@ public class GameField {
         System.out.println("");
 
         for (int i = 0; i < GameField.X_MAX; i++) {
-            System.out.println(Integer.toString(i) + " | ");
+            System.out.print(Integer.toString(i) + " | ");
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
@@ -178,6 +179,7 @@ public class GameField {
      * Метод выводит на экран чужое игровое поле
      */
     public void printEnemyField() {
+        System.out.print("    ");
         for (int i = 0; i < GameField.X_MAX; i++) {
             System.out.print(" " + Integer.toString(i) + (i + 1 < 10 ? " " : ""));
         }
@@ -185,7 +187,7 @@ public class GameField {
         System.out.println("");
 
         for (int i = 0; i < GameField.X_MAX; i++) {
-            System.out.println(Integer.toString(i) + " | ");
+            System.out.print(Integer.toString(i) + " | ");
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
