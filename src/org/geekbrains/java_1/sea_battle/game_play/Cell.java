@@ -14,7 +14,7 @@ public class Cell {
     private boolean hit;
 
     // Сектор корабля который находится в этой ячейке
-    private Ship ship;
+    private Ship ship = null;
 
     public Cell(int x, int y) {
         this.x = x;
