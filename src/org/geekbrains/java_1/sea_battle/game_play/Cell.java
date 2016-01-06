@@ -68,7 +68,7 @@ public class Cell {
      * @return boolean
      */
     public boolean hasShip() {
-        return this.ship == null;
+        return this.ship != null;
     }
 
     public int getX() {
