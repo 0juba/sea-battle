@@ -102,10 +102,7 @@ public class GamePlay {
                             break;
                     }
                 } while (choice != 5);
-            } else {
-                System.out.println("Неверный выбор. Допустимые значения: 1, 2.");
             }
-
         } while (userChoice != this.EXIT);
     }
 
