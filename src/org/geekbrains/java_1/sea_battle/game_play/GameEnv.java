@@ -49,26 +49,26 @@ public class GameEnv {
     }
 
     private ArrayList<Sheep> createSheeps() {
-        ArrayList<Sheep> sheeps = new ArrayList<>();
+        ArrayList<Sheep> ships = new ArrayList<>();
 
         // Size 1, allow 4
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_1));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
 
         // Size 2, allow 3
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_2));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_2));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_2));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
 
         // Size 3, allow 2
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_3));
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_3));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_3));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_3));
 
         // Size 4, allow 1
-        sheeps.add(new Sheep(Sheep.SHEEP_SIZE_4));
+        ships.add(new Sheep(Sheep.SHEEP_SIZE_4));
 
-        return sheeps;
+        return ships;
     }
 }
