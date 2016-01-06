@@ -14,7 +14,7 @@ public class Cell {
     private boolean hit;
 
     // Сектор корабля который находится в этой ячейке
-    private Sheep sheep;
+    private Ship ship;
 
     public Cell(int x, int y) {
         this.x = x;
@@ -53,13 +53,13 @@ public class Cell {
         this.neighboring = true;
     }
 
-    public Sheep getSheep() {
-        return sheep;
+    public Ship getSheep() {
+        return ship;
     }
 
-    public void setSheep(Sheep sheep) {
+    public void setSheep(Ship ship) {
         if (!this.hasSheep()) {
-            this.sheep = sheep;
+            this.ship = ship;
         }
     }
 
@@ -68,7 +68,7 @@ public class Cell {
      * @return boolean
      */
     public boolean hasSheep() {
-        return this.sheep == null;
+        return this.ship == null;
     }
 
     public int getX() {

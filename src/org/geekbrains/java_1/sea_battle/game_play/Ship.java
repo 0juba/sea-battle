@@ -5,7 +5,7 @@ import java.util.HashMap;
 /**
  * Created by Guba Andrei on 22.12.15.
  */
-public class Sheep {
+public class Ship {
     public static final int ORIENTATION_VERTICAL = 1;
     public static final int ORIENTATION_HORIZONTAL = 2;
 
@@ -21,8 +21,8 @@ public class Sheep {
     // Ключ - это координата сектора корабля, значение - подбит (true) или целый (false)
     private HashMap<Cell, Boolean> position;
 
-    public Sheep(int sheepSize) {
-        this.size = sheepSize;
+    public Ship(int shipSize) {
+        this.size = shipSize;
         this.destroyed = false;
 
         this.position = new HashMap<>();
@@ -40,7 +40,7 @@ public class Sheep {
         return orientation;
     }
 
-    public Sheep setOrientation(int orientation) {
+    public Ship setOrientation(int orientation) {
         this.orientation = orientation;
 
         return this;
@@ -50,9 +50,9 @@ public class Sheep {
      * Метод сохраняет позицию сектора корабля
      *
      * @param position Cell
-     * @return Sheep
+     * @return Ship
      */
-    public Sheep placeSheep(Cell position) {
+    public Ship placeSheep(Cell position) {
         this.position.put(position, false);
 
         return this;
@@ -68,9 +68,9 @@ public class Sheep {
      * Метод фиксирует урон по сектору корабля
      *
      * @param position Cell
-     * @return Sheep
+     * @return Ship
      */
-    public Sheep setDamage(Cell position) {
+    public Ship setDamage(Cell position) {
         if (null != this.position.get(position) && !this.position.get(position)) {
             this.position.put(position, true);
 

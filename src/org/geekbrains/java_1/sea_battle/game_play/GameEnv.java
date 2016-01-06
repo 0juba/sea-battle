@@ -48,26 +48,26 @@ public class GameEnv {
         return aiGameField;
     }
 
-    private ArrayList<Sheep> createSheeps() {
-        ArrayList<Sheep> ships = new ArrayList<>();
+    private ArrayList<Ship> createSheeps() {
+        ArrayList<Ship> ships = new ArrayList<>();
 
         // Size 1, allow 4
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_1));
+        ships.add(new Ship(Ship.SHEEP_SIZE_1));
+        ships.add(new Ship(Ship.SHEEP_SIZE_1));
+        ships.add(new Ship(Ship.SHEEP_SIZE_1));
+        ships.add(new Ship(Ship.SHEEP_SIZE_1));
 
         // Size 2, allow 3
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_2));
+        ships.add(new Ship(Ship.SHEEP_SIZE_2));
+        ships.add(new Ship(Ship.SHEEP_SIZE_2));
+        ships.add(new Ship(Ship.SHEEP_SIZE_2));
 
         // Size 3, allow 2
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_3));
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_3));
+        ships.add(new Ship(Ship.SHEEP_SIZE_3));
+        ships.add(new Ship(Ship.SHEEP_SIZE_3));
 
         // Size 4, allow 1
-        ships.add(new Sheep(Sheep.SHEEP_SIZE_4));
+        ships.add(new Ship(Ship.SHEEP_SIZE_4));
 
         return ships;
     }

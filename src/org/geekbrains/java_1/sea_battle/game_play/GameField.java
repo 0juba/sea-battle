@@ -18,7 +18,7 @@ public class GameField {
 
     // Ячейки игрового поля
     private Cell[][] cells;
-    private ArrayList<Sheep> sheeps = new ArrayList<>();
+    private ArrayList<Ship> ships = new ArrayList<>();
 
     public GameField() {
         this.cells = new Cell[GameField.X_MAX][GameField.Y_MAX];
@@ -31,13 +31,13 @@ public class GameField {
         }
     }
 
-    public ArrayList<Sheep> getSheeps() {
-        return sheeps;
+    public ArrayList<Ship> getSheeps() {
+        return ships;
     }
 
     public boolean isSheepsDestroyed() {
-        for (Sheep sheep : this.sheeps) {
-            if (!sheep.isDestroyed()) {
+        for (Ship ship : this.ships) {
+            if (!ship.isDestroyed()) {
                 return false;
             }
         }
@@ -48,13 +48,13 @@ public class GameField {
     /**
      * Метод размещает коллекцию кораблей случайным образом на игровом поле
      * 
-     * @param sheeps ArrayList<Sheep>
+     * @param ships ArrayList<Ship>
      */
-    public void putSheeps(ArrayList<Sheep> sheeps) {
+    public void putSheeps(ArrayList<Ship> ships) {
         Random random = new Random();
-        this.sheeps = sheeps;
+        this.ships = ships;
         
-        for (Sheep sheep : sheeps) {
+        for (Ship ship : ships) {
             int x, y, attempts = 0;
 
             do {                
@@ -69,22 +69,22 @@ public class GameField {
                 y = this.getRandPosition(random, GameField.Y_MAX);
 
                 // Пытаемся разместить корабль по горизонтали слева - направо
-                if (this.checkAndMarkPosition(x, y, sheep.setOrientation(Sheep.ORIENTATION_HORIZONTAL))) {
+                if (this.checkAndMarkPosition(x, y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по вертикали снизу - вверх
-                if (this.checkAndMarkPosition(x, y, sheep.setOrientation(Sheep.ORIENTATION_VERTICAL))) {
+                if (this.checkAndMarkPosition(x, y, ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по вертикали сверху - вниз
-                if (this.checkAndMarkPosition(x, y - sheep.getSize(), sheep.setOrientation(Sheep.ORIENTATION_VERTICAL))) {
+                if (this.checkAndMarkPosition(x, y - ship.getSize(), ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по горизонтали справа - налево
-                if (this.checkAndMarkPosition(x - sheep.getSize(), y, sheep.setOrientation(Sheep.ORIENTATION_HORIZONTAL))) {
+                if (this.checkAndMarkPosition(x - ship.getSize(), y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
                     break;
                 }
 
@@ -107,7 +107,7 @@ public class GameField {
 
     public boolean fire(int x, int y) throws AlreadyFallenException {
         Cell cell = this.cells[x-1][y-1];
-        Sheep sheep = cell.getSheep();
+        Ship ship = cell.getSheep();
 
         if (cell.isHit()) {
             throw new AlreadyFallenException("Вы уже нанесли удар по этим координатам.");
@@ -118,7 +118,7 @@ public class GameField {
 
         // Если есть корабль - нужно зафиксировать урон
         if (cell.hasSheep()) {
-            sheep.setDamage(cell);
+            ship.setDamage(cell);
             return true;
         }
 
@@ -157,10 +157,10 @@ public class GameField {
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
-                Sheep sheep = cell.getSheep();
+                Ship ship = cell.getSheep();
 
-                if (null != sheep) {
-                    if (sheep.isDamaged(cell)) {
+                if (null != ship) {
+                    if (ship.isDamaged(cell)) {
                         System.out.print(" x ");
                     } else {
                         System.out.print(" * ");
@@ -189,9 +189,9 @@ public class GameField {
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
-                Sheep sheep = cell.getSheep();
+                Ship ship = cell.getSheep();
 
-                if (null != sheep && sheep.isDamaged(cell)) {
+                if (null != ship && ship.isDamaged(cell)) {
                     System.out.print(" x ");
                 } else {
                     System.out.print(" . ");
@@ -207,18 +207,18 @@ public class GameField {
      * 
      * @param x int
      * @param y int
-     * @param sheep Sheep
+     * @param ship Ship
      * @return boolean
      */
-    private boolean checkAndMarkPosition(int x, int y, Sheep sheep) {
+    private boolean checkAndMarkPosition(int x, int y, Ship ship) {
         // Индексы массива начинаютс с 0
         int xI = x - 1;
         int yI = y - 1;
 
-        int size = sheep.getSize();
+        int size = ship.getSize();
 
-        switch (sheep.getOrientation()) {
-            case Sheep.ORIENTATION_HORIZONTAL:
+        switch (ship.getOrientation()) {
+            case Ship.ORIENTATION_HORIZONTAL:
                 // Проверяем, что корабль помещается
                 if (x + size > GameField.X_MAX || x < 1) {
                     return false;
@@ -255,7 +255,7 @@ public class GameField {
                 // Помещаем корабль на игровое поле
                 for (int i = xI; i < size + xI; i++) {
                     // Помечаем клетку занятой кораблем
-                    cells[i][yI].setSheep(sheep);
+                    cells[i][yI].setSheep(ship);
 
                     // Клетку сверху помеяаем недоступной
                     if (y < GameField.Y_MAX) {
@@ -279,7 +279,7 @@ public class GameField {
                 }
 
                 break;
-            case Sheep.ORIENTATION_VERTICAL:
+            case Ship.ORIENTATION_VERTICAL:
                 // Проверяем что корабль помещается
                 if (y + size > GameField.Y_MAX || y < 1) {
                     return false;
@@ -316,7 +316,7 @@ public class GameField {
                 // Размещаем корабль на игровом поле
                 for (int i = yI; i < size + yI; i++) {
                     // Помечаем саму ячейка, что она содержит корабль
-                    cells[xI][i].setSheep(sheep);
+                    cells[xI][i].setSheep(ship);
 
                     // Помечаем смежную ячейку справа
                     if (x < GameField.X_MAX) {
