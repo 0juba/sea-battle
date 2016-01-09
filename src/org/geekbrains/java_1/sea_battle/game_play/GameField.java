@@ -18,6 +18,7 @@ public class GameField {
 
     // Ячейки игрового поля
     private Cell[][] cells;
+    // Список кораблей
     private ArrayList<Ship> ships = new ArrayList<>();
 
     public GameField() {
@@ -57,14 +58,7 @@ public class GameField {
         for (Ship ship : ships) {
             int x, y, attempts = 0;
 
-            do {                
-                // TODO: требуется повторное размещения кораблей
-                // TODO: требуется проверка что корабли указанного размера поместятся на поле
-                if (attempts > GameField.MAX_ATTEMPTS) {
-                    // Слишком много попыток сделано для одного корабля, оставляем попытки его разместить
-                    break;
-                }
-
+            do {
                 x = this.getRandPosition(random, GameField.X_MAX);
                 y = this.getRandPosition(random, GameField.Y_MAX);
 
@@ -87,9 +81,9 @@ public class GameField {
                 if (this.checkAndMarkPosition(x - ship.getSize(), y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
                     break;
                 }
-
-                attempts++;
-            } while(true);
+                // TODO: требуется повторное размещения кораблей
+                // TODO: требуется проверка что корабли указанного размера поместятся на поле
+            } while(++attempts < GameField.MAX_ATTEMPTS);
         }
     }
 
