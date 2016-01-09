@@ -6,7 +6,7 @@ import org.geekbrains.java_1.sea_battle.game_play.GameField;
 import java.util.Random;
 
 /**
- * Проста реализация искуственного "опонента", бьет постоянно по случайным координатам
+ * Простая реализация искуственного "опонента", бьет постоянно по случайным координатам
  *
  * Created by Guba Andrei on 25.12.15.
  */
@@ -33,7 +33,13 @@ public class PlayerAiDummy extends Player {
         }
 
         // Запомним ход компьютера
-        super.addHistoryRow(enemyField.getCell(x, y), successHit);
+        super.addHistoryRow(
+            enemyField.getCell(
+                GameField.convertXCoordinateToIndex(x),
+                GameField.convertYCoordinateToIndex(y)
+            ),
+            successHit
+        );
 
         return successHit;
     }
