@@ -142,30 +142,29 @@ public class GameField {
         return pos;
     }
 
-    /**
-     * Метод выводит на экран собственное игровое поле
-     */
-    public void printOwnField() {
-        System.out.print("    ");
-        for (int i = 1; i < GameField.X_MAX; i++) {
+    private void printField(boolean showShip) {
+        System.out.print("     ");
+
+        // Выведем ось Х
+        for (int i = 1; i <= GameField.X_MAX; i++) {
             System.out.print(" " + Integer.toString(i) + (i + 1 < GameField.X_MAX ? " " : ""));
         }
 
         System.out.println("");
 
         for (int i = 0; i < GameField.Y_MAX; i++) {
-            System.out.print(Integer.toString(i) + " | ");
+            // Вывод оси У
+            System.out.print(String.format("%-3d| ", i + 1));
 
+            // Вывод поля
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
                 Ship ship = cell.getShip();
 
-                if (null != ship) {
-                    if (ship.isDamaged(cell)) {
-                        System.out.print(" x ");
-                    } else {
-                        System.out.print(" * ");
-                    }
+                if (cell.hasShip() && ship.isDamaged(cell)) {
+                    System.out.print(" x ");
+                } else if (showShip && cell.hasShip()) {
+                    System.out.print(" * ");
                 } else {
                     System.out.print(" . ");
                 }
@@ -176,32 +175,17 @@ public class GameField {
     }
 
     /**
+     * Метод выводит на экран собственное игровое поле
+     */
+    public void printOwnField() {
+        this.printField(true);
+    }
+
+    /**
      * Метод выводит на экран чужое игровое поле
      */
     public void printEnemyField() {
-        System.out.print("    ");
-        for (int i = 1; i <= GameField.X_MAX; i++) {
-            System.out.print(" " + Integer.toString(i) + (i + 1 < GameField.X_MAX ? " " : ""));
-        }
-
-        System.out.println("");
-
-        for (int i = 0; i < GameField.Y_MAX; i++) {
-            System.out.print(Integer.toString(i + 1) + " | ");
-
-            for (int j = 0; j < GameField.Y_MAX; j++) {
-                Cell cell = this.cells[i][j];
-                Ship ship = cell.getShip();
-
-                if (null != ship && ship.isDamaged(cell)) {
-                    System.out.print(" x ");
-                } else {
-                    System.out.print(" . ");
-                }
-            }
-
-            System.out.println("");
-        }
+        this.printField(false);
     }
 
     /**
