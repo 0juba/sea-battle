@@ -63,22 +63,22 @@ public class GameField {
                 y = this.getRandPosition(random, GameField.Y_MAX);
 
                 // Пытаемся разместить корабль по горизонтали слева - направо
-                if (this.checkAndMarkPosition(x, y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
+                if (this.checkAndMarkPositionOnField(x, y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по вертикали снизу - вверх
-                if (this.checkAndMarkPosition(x, y, ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
+                if (this.checkAndMarkPositionOnField(x, y, ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по вертикали сверху - вниз
-                if (this.checkAndMarkPosition(x, y - ship.getSize(), ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
+                if (this.checkAndMarkPositionOnField(x, y - ship.getSize(), ship.setOrientation(Ship.ORIENTATION_VERTICAL))) {
                     break;
                 }
 
                 // Пытаемся разместить корабль по горизонтали справа - налево
-                if (this.checkAndMarkPosition(x - ship.getSize(), y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
+                if (this.checkAndMarkPositionOnField(x - ship.getSize(), y, ship.setOrientation(Ship.ORIENTATION_HORIZONTAL))) {
                     break;
                 }
                 // TODO: требуется повторное размещения кораблей
@@ -152,6 +152,11 @@ public class GameField {
         return pos;
     }
 
+    /**
+     * Метод выводит в консоль игровое поле
+     *
+     * @param showShip boolean
+     */
     private void printField(boolean showShip) {
         System.out.print("     ");
 
@@ -212,10 +217,10 @@ public class GameField {
      * @param ship Ship
      * @return boolean
      */
-    private boolean checkAndMarkPosition(int x, int y, Ship ship) {
+    private boolean checkAndMarkPositionOnField(int x, int y, Ship ship) {
         // Индексы массива начинаютс с 0
-        int xI = x - 1;
-        int yI = y - 1;
+        int xI = convertXCoordinateToIndex(x);
+        int yI = convertYCoordinateToIndex(y);
 
         int size = ship.getSize();
 
