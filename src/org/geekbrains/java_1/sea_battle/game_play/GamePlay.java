@@ -1,5 +1,9 @@
 package org.geekbrains.java_1.sea_battle.game_play;
 
+import org.geekbrains.java_1.sea_battle.player.PlayerAiDummy;
+import org.geekbrains.java_1.sea_battle.player.PlayerHuman;
+
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -34,10 +38,10 @@ public class GamePlay {
         do {
             // Показываем основное меню
             this.displayMainMenu();
-            userChoice = scanner.nextInt();
+            userChoice = this.readIntFromConsole(scanner);
 
             if (userChoice == 1) {
-                System.out.println("Да начнется бой!");
+                System.out.println("\nДа начнется бой!\n");
 
                 // Подготовим игровые поля и расставим корабли
                 gameEnv.refresh();
@@ -46,29 +50,36 @@ public class GamePlay {
                 // Игра
                 do {
                     this.displayGameMenu();
-                    choice = scanner.nextInt();
+                    choice = this.readIntFromConsole(scanner);
+
+                    PlayerHuman playerHuman = gameEnv.getPlayerHuman();
+                    PlayerAiDummy playerAiDummy = gameEnv.getPlayerAi();
+                    GameField AIGameField = gameEnv.getAiGameField();
+                    GameField userGameField = gameEnv.getUserGameField();
 
                     switch (choice) {
                         case 1:
-                            if (gameEnv.getPlayerHuman().makeTurn(gameEnv.getAiGameField())) {
+                            // Пользователь делает ход
+                            if (playerHuman.makeTurn(AIGameField)) {
                                 // Игрок попал, продолжаем делать ходы
                                 System.out.println("Есть! Попадание!");
 
                                 // Проверим, вдруг все убиты, пора закругляться
-                                if (gameEnv.getAiGameField().isShipsDestroyed()) {
+                                if (AIGameField.isShipsDestroyed()) {
                                     System.out.println("Поздравляем! Вы победили!");
                                     choice = 5;
+                                } else {
+                                    break;
                                 }
-
                             } else {
                                 System.out.println("Промах! Ход опонента!");
                                 // Ход компьютера
                                 do {
-                                    if (gameEnv.getPlayerAi().makeTurn(gameEnv.getUserGameField())) {
+                                    if (playerAiDummy.makeTurn(userGameField)) {
                                         System.out.println("Ваш корабль подбит!");
 
                                         // Победа компьютера
-                                        if (gameEnv.getUserGameField().isShipsDestroyed()) {
+                                        if (userGameField.isShipsDestroyed()) {
                                             System.out.println("Вы проиграли! Попытайте счастье в другой раз");
                                             choice = 5;
                                             break;
@@ -79,22 +90,24 @@ public class GamePlay {
                                         break;
                                     }
                                 } while (true);
-                            }
 
-                            break;
+                                if (choice == 1) {
+                                    break;
+                                }
+                            }
                         case 2:
                             // Вывод поля для опонента
-                            gameEnv.getAiGameField().printEnemyField();
+                            AIGameField.printEnemyField();
 
                             break;
                         case 3:
                             // Смотрим свое поле
-                            gameEnv.getUserGameField().printOwnField();
+                            userGameField.printOwnField();
 
                             break;
                         case 4:
                             // Показать историю ходов
-                            gameEnv.getPlayerHuman().printHistory();
+                            playerHuman.printHistory();
 
                             break;
                         case 5:
@@ -123,5 +136,18 @@ public class GamePlay {
 
     public void displayGreeting() {
         System.out.println("Добро пожаловать в игру Морской бой (классический)!");
+    }
+
+    private int readIntFromConsole(Scanner scanner) {
+        int inputInt = 0;
+
+        try {
+            inputInt = scanner.nextInt();
+        } catch (InputMismatchException e) {
+            scanner.nextLine();
+            System.out.println("Можно вводить только целые числа - номера пунктов меню!");
+        }
+
+        return inputInt;
     }
 }
