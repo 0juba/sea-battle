@@ -147,13 +147,13 @@ public class GameField {
      */
     public void printOwnField() {
         System.out.print("    ");
-        for (int i = 0; i < GameField.X_MAX; i++) {
-            System.out.print(" " + Integer.toString(i) + (i + 1 < 10 ? " " : ""));
+        for (int i = 1; i < GameField.X_MAX; i++) {
+            System.out.print(" " + Integer.toString(i) + (i + 1 < GameField.X_MAX ? " " : ""));
         }
 
         System.out.println("");
 
-        for (int i = 0; i < GameField.X_MAX; i++) {
+        for (int i = 0; i < GameField.Y_MAX; i++) {
             System.out.print(Integer.toString(i) + " | ");
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
@@ -180,14 +180,14 @@ public class GameField {
      */
     public void printEnemyField() {
         System.out.print("    ");
-        for (int i = 0; i < GameField.X_MAX; i++) {
-            System.out.print(" " + Integer.toString(i) + (i + 1 < 10 ? " " : ""));
+        for (int i = 1; i <= GameField.X_MAX; i++) {
+            System.out.print(" " + Integer.toString(i) + (i + 1 < GameField.X_MAX ? " " : ""));
         }
 
         System.out.println("");
 
-        for (int i = 0; i < GameField.X_MAX; i++) {
-            System.out.print(Integer.toString(i) + " | ");
+        for (int i = 0; i < GameField.Y_MAX; i++) {
+            System.out.print(Integer.toString(i + 1) + " | ");
 
             for (int j = 0; j < GameField.Y_MAX; j++) {
                 Cell cell = this.cells[i][j];
