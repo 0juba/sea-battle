@@ -14,7 +14,7 @@ public class GameField {
     public final static int Y_MAX = 10;
     
     // Максимальное количество попыток разместить корабль случайным образом на игровом поле
-    public final static int MAX_ATTEMPTS = 10;
+    public final static int MAX_ATTEMPTS = 100;
 
     // Ячейки игрового поля
     private Cell[][] cells;
