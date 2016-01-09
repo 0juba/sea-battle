@@ -29,6 +29,16 @@ abstract public class Player implements PlayerInterface {
         return this.history.size();
     }
 
+    /**
+     *
+     * @param phrase String
+     */
+    public void tell(String phrase) {
+        System.out.println();
+        System.out.println("-> " + this.name + ": " + phrase);
+        System.out.println("---------------------");
+    }
+
     public void printHistory() {
         for(Map.Entry<Cell, Boolean> entry : this.history.entrySet()) {
             Cell cell = entry.getKey();

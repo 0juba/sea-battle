@@ -11,6 +11,10 @@ import java.util.Random;
  * Created by Guba Andrei on 25.12.15.
  */
 public class PlayerAiDummy extends Player {
+    public PlayerAiDummy() {
+        super.setName("Skynet");
+    }
+
     @Override
     public boolean makeTurn(GameField enemyField) {
         Random random = new Random();

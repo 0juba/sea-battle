@@ -62,31 +62,34 @@ public class GamePlay {
                             // Пользователь делает ход
                             if (playerHuman.makeTurn(AIGameField)) {
                                 // Игрок попал, продолжаем делать ходы
-                                System.out.println("Есть! Попадание!");
+                                playerHuman.tell("Ура! Попал!");
 
                                 // Проверим, вдруг все убиты, пора закругляться
                                 if (AIGameField.isShipsDestroyed()) {
-                                    System.out.println("Поздравляем! Вы победили!");
+                                    playerHuman.tell("Победа!");
                                     choice = 5;
                                 } else {
                                     break;
                                 }
                             } else {
-                                System.out.println("Промах! Ход опонента!");
+                                playerAiDummy.tell("Промах! Мой ход! Тебе конец! Бгааааа!!!");
+
                                 // Ход компьютера
                                 do {
                                     if (playerAiDummy.makeTurn(userGameField)) {
-                                        System.out.println("Ваш корабль подбит!");
+                                        playerAiDummy.tell("Попадание! Один готов! Следующий!");
 
                                         // Победа компьютера
                                         if (userGameField.isShipsDestroyed()) {
-                                            System.out.println("Вы проиграли! Попытайте счастье в другой раз");
+                                            playerAiDummy.tell("Ты проиграл! Может в следующий раз повезет?");
                                             choice = 5;
+
                                             break;
                                         }
                                     } else {
                                         // Передаем управление пользователю
-                                        System.out.println("Враг промазал!");
+                                        playerAiDummy.tell("О-о-у.... Промазал???");
+
                                         break;
                                     }
                                 } while (true);
@@ -120,12 +123,14 @@ public class GamePlay {
     }
 
     public void displayMainMenu() {
+        System.out.println();
         System.out.println("1. Начать бой");
         System.out.println("2. Выход");
         System.out.println();
     }
 
     public void displayGameMenu() {
+        System.out.println();
         System.out.println("1. Сделать ход");
         System.out.println("2. Показать поле противника");
         System.out.println("3. Показать мое поле");
