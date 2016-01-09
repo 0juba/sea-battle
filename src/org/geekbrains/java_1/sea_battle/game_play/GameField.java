@@ -172,10 +172,16 @@ public class GameField {
                 Ship ship = cell.getShip();
 
                 if (cell.hasShip() && ship.isDamaged(cell)) {
+                    // Если в ячейке есть корабль и по нему попали
                     System.out.print(" x ");
                 } else if (showShip && cell.hasShip()) {
+                    // Если в ячейке есть живой корабль
                     System.out.print(" * ");
+                } else if (cell.isHit()) {
+                    // Ячейка по которой уже стреляли
+                    System.out.print(" _ ");
                 } else {
+                    // Пустая не тронутая клетка
                     System.out.print(" . ");
                 }
             }
