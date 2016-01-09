@@ -23,8 +23,8 @@ public class PlayerHuman extends Player {
             System.out.println();
 
             try {
-                x = scanner.nextInt();
                 y = scanner.nextInt();
+                x = scanner.nextInt();
 
                 if ((x >= 1 && x <= GameField.X_MAX) && (y >= 1 && y <= GameField.Y_MAX)) {
                     break;
