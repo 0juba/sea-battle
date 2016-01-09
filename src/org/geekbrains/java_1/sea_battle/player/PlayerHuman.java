@@ -12,11 +12,13 @@ import java.util.Scanner;
 public class PlayerHuman extends Player {
     @Override
     public boolean makeTurn(GameField enemyField) {
-        int i = 0, x = 0, y = 0;
+        int attemptsCount = super.ATTEMPTS_PER_TURN, x = 0, y = 0;
         Scanner scanner = new Scanner(System.in);
 
         // Запросим координаты у пользователя
         do {
+            attemptsCount--;
+
             System.out.println(String.format("Введите координаты x[1..%d], y[1..%d]:", GameField.X_MAX, GameField.Y_MAX));
             System.out.println();
 
@@ -29,12 +31,17 @@ public class PlayerHuman extends Player {
                 }
             } catch (InputMismatchException e) {
                 System.out.println("Можно ввести только целое число!");
-                continue;
+                // В буфере входного потока осталось неверное значение, заберем его
+                scanner.nextLine();
             }
 
-            System.out.println("Вы указали неверные координаты, повторите заново!");
-            i++;
-        } while(i < super.ATTEMPTS_PER_TURN);
+            System.out.println("Вы указали неверные координаты, повторите заново! Осталось попыток: " + attemptsCount);
+        } while(attemptsCount > 0);
+
+        if (attemptsCount == 0) {
+            System.out.println("Вы исчерпали допустимое количество попыток! Ход передается опоненту!");
+            return false;
+        }
 
         // Успешное попадание
         boolean successHit = false;
