@@ -99,8 +99,24 @@ public class GameField {
         return this.cells[x][y];
     }
 
+    public static int convertXCoordinateToIndex(int xCoordinate) {
+        return xCoordinate - 1;
+    }
+
+    public static int convertYCoordinateToIndex(int yCoordinate) {
+        return yCoordinate - 1;
+    }
+
+    /**
+     * Метод фиксирует попытку нанесту удар по кораблю размещенному в этом поле
+     *
+     * @param x int Индекс массива !НЕ Координата
+     * @param y int Индекс массива !НЕ Координата
+     * @return boolean
+     * @throws AlreadyFallenException
+     */
     public boolean fire(int x, int y) throws AlreadyFallenException {
-        Cell cell = this.cells[x-1][y-1];
+        Cell cell = this.cells[x][y];
         Ship ship = cell.getShip();
 
         if (cell.isHit()) {

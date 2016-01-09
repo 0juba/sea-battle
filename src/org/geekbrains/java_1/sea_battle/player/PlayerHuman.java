@@ -48,7 +48,10 @@ public class PlayerHuman extends Player {
 
         try {
             // Попробуем ударить по вражескому кораблю
-            successHit = enemyField.fire(x, y);
+            successHit = enemyField.fire(
+                    GameField.convertXCoordinateToIndex(x),
+                    GameField.convertYCoordinateToIndex(y)
+            );
         } catch (AlreadyFallenException e) {
             System.out.println(e.getMessage());
         }
