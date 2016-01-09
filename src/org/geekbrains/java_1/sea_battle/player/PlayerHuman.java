@@ -57,7 +57,13 @@ public class PlayerHuman extends Player {
         }
 
         // Запомним ход пользователя
-        super.addHistoryRow(enemyField.getCell(x, y), successHit);
+        super.addHistoryRow(
+                enemyField.getCell(
+                        GameField.convertXCoordinateToIndex(x),
+                        GameField.convertYCoordinateToIndex(y)
+                ),
+                successHit
+        );
 
         return successHit;
     }
