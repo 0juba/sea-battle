@@ -223,7 +223,7 @@ public class GameField {
      * Метод выводит на экран чужое игровое поле
      */
     public void printEnemyField() {
-        System.out.println();
+        System.out.println("Вражеское поле");
         this.printField(false);
         System.out.println();
     }

@@ -60,6 +60,8 @@ public class GamePlay {
                     switch (choice) {
                         case 1:
                             // Пользователь делает ход
+                            AIGameField.printEnemyField();
+
                             if (playerHuman.makeTurn(AIGameField)) {
                                 // Игрок попал, продолжаем делать ходы
                                 playerHuman.tell("Ура! Попал!");
