@@ -18,9 +18,12 @@ public class PlayerAiDummy extends Player {
     @Override
     public boolean makeTurn(GameField enemyField) {
         Random random = new Random();
+        int x, y, attempts = 10;
 
-        int x = enemyField.getRandPosition(random, GameField.X_MAX);
-        int y = enemyField.getRandPosition(random, GameField.Y_MAX);
+        do {
+            x = GameField.convertXCoordinateToIndex(enemyField.getRandPosition(random, GameField.X_MAX));
+            y = GameField.convertYCoordinateToIndex(enemyField.getRandPosition(random, GameField.Y_MAX));
+        } while (enemyField.getCell(x, y).isHit() || --attempts > 0);
 
         // Успешное попадание
         boolean successHit = false;
@@ -33,13 +36,7 @@ public class PlayerAiDummy extends Player {
         }
 
         // Запомним ход компьютера
-        super.addHistoryRow(
-            enemyField.getCell(
-                GameField.convertXCoordinateToIndex(x),
-                GameField.convertYCoordinateToIndex(y)
-            ),
-            successHit
-        );
+        super.addHistoryRow(enemyField.getCell(x, y), successHit);
 
         return successHit;
     }
