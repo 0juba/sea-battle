@@ -3,6 +3,7 @@ package org.geekbrains.java_1.sea_battle.game_play;
 import org.geekbrains.java_1.sea_battle.exceptions.AlreadyFallenException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Random;
 
 /**
@@ -129,6 +130,20 @@ public class GameField {
         // Если есть корабль - нужно зафиксировать урон
         if (cell.hasShip()) {
             ship.setDamage(cell);
+
+            // Если корабль уничтожен - помечаем все соседние ячейки как подбитые
+            if (ship.isDestroyed()) {
+                HashMap<Cell, Boolean> shipPosition = ship.getPosition();
+
+                // Пробегаем по всем ячейкам где расположены секции корабля
+                for(Cell shipCell : shipPosition.keySet()) {
+                    // В каждой ячейке пробегаем по списку смежных ячеек
+                    for (Cell neighboringCell : shipCell.getNeighboringCells()) {
+                        neighboringCell.setHit(true);
+                    }
+                }
+            }
+
             return true;
         }
 
@@ -273,22 +288,26 @@ public class GameField {
                     // Клетку сверху помеяаем недоступной
                     if (y < GameField.Y_MAX) {
                         cells[i][yI + 1].setNeighboring();
+                        cells[i][yI].addNeighboringCell(cells[i][yI + 1]);
                     }
 
                     // Клетку снизу помечаем недоступной
                     if (y > 1) {
                         cells[i][yI - 1].setNeighboring();
+                        cells[i][yI].addNeighboringCell(cells[i][yI - 1]);
                     }
                 }
 
                 // Клетку перед кораблем помечаем недоступной
                 if (x > 1) {
                     cells[xI - 1][yI].setNeighboring();
+                    cells[xI][yI].addNeighboringCell(cells[xI - 1][yI]);
                 }
 
                 // Клетку после корабля помечаем недоступной
                 if (x + size <= GameField.X_MAX) {
                     cells[xI + size][yI].setNeighboring();
+                    cells[xI + size - 1][yI].addNeighboringCell(cells[xI + size][yI]);
                 }
 
                 break;
@@ -336,22 +355,26 @@ public class GameField {
                     // Помечаем смежную ячейку справа
                     if (x < GameField.X_MAX) {
                         cells[xI + 1][i].setNeighboring();
+                        cells[xI][i].addNeighboringCell(cells[xI + 1][i]);
                     }
 
                     // Помечаем смежную ячейку слева
                     if (x > 1) {
                         cells[xI - 1][i].setNeighboring();
+                        cells[xI][i].addNeighboringCell(cells[xI - 1][i]);
                     }
                 }
 
                 // Помечаем смежную ячейку после конца корабля
                 if (y > 1) {
                     cells[xI][yI - 1].setNeighboring();
+                    cells[xI][yI].addNeighboringCell(cells[xI][yI - 1]);
                 }
 
                 // Помечаем смежную ячейку перед началом корабля
                 if (y + size <= GameField.Y_MAX) {
                     cells[xI][yI + size].setNeighboring();
+                    cells[xI][yI + size - 1].addNeighboringCell(cells[xI][yI + size]);
                 }
 
                 break;

@@ -21,6 +21,10 @@ public class Ship {
     // Ключ - это координата сектора корабля, значение - подбит (true) или целый (false)
     private HashMap<Cell, Boolean> position;
 
+    public HashMap<Cell, Boolean> getPosition() {
+        return position;
+    }
+
     public Ship(int shipSize) {
         this.size = shipSize;
         this.destroyed = false;
