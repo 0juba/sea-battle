@@ -199,14 +199,18 @@ public class GameField {
      * Метод выводит на экран собственное игровое поле
      */
     public void printOwnField() {
+        System.out.println();
         this.printField(true);
+        System.out.println();
     }
 
     /**
      * Метод выводит на экран чужое игровое поле
      */
     public void printEnemyField() {
+        System.out.println();
         this.printField(false);
+        System.out.println();
     }
 
     /**
