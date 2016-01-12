@@ -7,9 +7,7 @@ import org.java_1.sea_battle.game_play.GamePlay;
  */
 public class Main {
     public static void main(String[] args) {
-        GamePlay game = new GamePlay();
-
-        // Да начнется бой
-        game.start();
+        // Да начнется бой!
+        GamePlay.getInstance().start();
     }
 }

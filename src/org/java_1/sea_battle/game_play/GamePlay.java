@@ -15,6 +15,20 @@ public class GamePlay {
     final public int EXIT = 2;
     final public String DEFAULT_NAME = "Player 1";
 
+    private static GamePlay instance;
+
+    private GamePlay() {
+
+    }
+
+    public static GamePlay getInstance() {
+        if (GamePlay.instance == null) {
+            GamePlay.instance = new GamePlay();
+        }
+
+        return GamePlay.instance;
+    }
+
     public void start() {
         Scanner scanner = new Scanner(System.in);
         String playerName;
