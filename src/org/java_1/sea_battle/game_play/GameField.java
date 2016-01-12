@@ -283,7 +283,7 @@ public class GameField {
                     // Помечаем клетку занятой кораблем
                     cells[i][yI].setShip(ship);
                     // Запомним позицию сектора корабля
-                    ship.placeShip(cells[i][yI]);
+                    ship.placeShipSection(cells[i][yI]);
 
                     // Клетку сверху помеяаем недоступной
                     if (y < GameField.Y_MAX) {
@@ -350,7 +350,7 @@ public class GameField {
                     // Помечаем саму ячейка, что она содержит корабль
                     cells[xI][i].setShip(ship);
                     // Пометим, что секция корабля в этой ячейке хранится
-                    ship.placeShip(cells[xI][i]);
+                    ship.placeShipSection(cells[xI][i]);
 
                     // Помечаем смежную ячейку справа
                     if (x < GameField.X_MAX) {
