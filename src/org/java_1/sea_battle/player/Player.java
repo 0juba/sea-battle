@@ -1,7 +1,7 @@
-package org.geekbrains.java_1.sea_battle.player;
+package org.java_1.sea_battle.player;
 
-import org.geekbrains.java_1.sea_battle.game_play.Cell;
-import org.geekbrains.java_1.sea_battle.game_play.GameField;
+import org.java_1.sea_battle.game_play.Cell;
+import org.java_1.sea_battle.game_play.GameField;
 
 import java.util.HashMap;
 import java.util.Map;

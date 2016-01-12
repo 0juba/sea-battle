@@ -1,7 +1,7 @@
-package org.geekbrains.java_1.sea_battle.game_play;
+package org.java_1.sea_battle.game_play;
 
-import org.geekbrains.java_1.sea_battle.player.PlayerAiDummy;
-import org.geekbrains.java_1.sea_battle.player.PlayerHuman;
+import org.java_1.sea_battle.player.PlayerAiDummy;
+import org.java_1.sea_battle.player.PlayerHuman;
 
 import java.util.ArrayList;
 

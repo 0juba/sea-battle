@@ -1,6 +1,6 @@
-package org.geekbrains.java_1.sea_battle.game_play;
+package org.java_1.sea_battle.game_play;
 
-import org.geekbrains.java_1.sea_battle.exceptions.AlreadyFallenException;
+import org.java_1.sea_battle.exceptions.AlreadyFallenException;
 
 import java.util.ArrayList;
 import java.util.HashMap;

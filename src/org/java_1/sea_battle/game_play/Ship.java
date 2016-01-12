@@ -1,4 +1,4 @@
-package org.geekbrains.java_1.sea_battle.game_play;
+package org.java_1.sea_battle.game_play;
 
 import java.util.HashMap;
 

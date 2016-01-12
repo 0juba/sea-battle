@@ -1,6 +1,6 @@
-package org.geekbrains.java_1.sea_battle.player;
+package org.java_1.sea_battle.player;
 
-import org.geekbrains.java_1.sea_battle.game_play.GameField;
+import org.java_1.sea_battle.game_play.GameField;
 
 /**
  * Created by Guba Andrei on 25.12.15.

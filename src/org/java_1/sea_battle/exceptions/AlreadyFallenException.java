@@ -1,4 +1,4 @@
-package org.geekbrains.java_1.sea_battle.exceptions;
+package org.java_1.sea_battle.exceptions;
 
 /**
  * Created by Guba Andrei on 24.12.15.
