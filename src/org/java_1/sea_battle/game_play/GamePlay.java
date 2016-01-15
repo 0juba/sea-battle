@@ -12,14 +12,11 @@ import java.util.Scanner;
  * Created by Guba Andrei on 25.12.15.
  */
 public class GamePlay {
-    final public int EXIT = 2;
     final public String DEFAULT_NAME = "Player 1";
 
     private static GamePlay instance;
 
-    private GamePlay() {
-
-    }
+    private GamePlay() {}
 
     public static GamePlay getInstance() {
         if (GamePlay.instance == null) {
@@ -54,7 +51,7 @@ public class GamePlay {
             this.displayMainMenu();
             userChoice = this.readIntFromConsole(scanner);
 
-            if (userChoice == 1) {
+            if (userChoice == MainMenu.START_GAME) {
                 System.out.println("\nДа начнется бой!\n");
 
                 // Подготовим игровые поля и расставим корабли
@@ -72,7 +69,7 @@ public class GamePlay {
                     GameField userGameField = gameEnv.getUserGameField();
 
                     switch (choice) {
-                        case 1:
+                        case PlayMenu.DO_TURN:
                             // Пользователь делает ход
                             AIGameField.printEnemyField();
 
@@ -83,7 +80,7 @@ public class GamePlay {
                                 // Проверим, вдруг все убиты, пора закругляться
                                 if (AIGameField.isShipsDestroyed()) {
                                     playerHuman.tell("Победа!");
-                                    choice = 5;
+                                    choice = PlayMenu.STOP_GAME;
                                 } else {
                                     break;
                                 }
@@ -114,28 +111,28 @@ public class GamePlay {
                                     break;
                                 }
                             }
-                        case 2:
+                        case PlayMenu.SHOW_ENEMY_FIELD:
                             // Вывод поля для опонента
                             AIGameField.printEnemyField();
 
                             break;
-                        case 3:
+                        case PlayMenu.SHOW_MY_FIELD:
                             // Смотрим свое поле
                             userGameField.printOwnField();
 
                             break;
-                        case 4:
+                        case PlayMenu.SHOW_HISTORY:
                             // Показать историю ходов
                             playerHuman.printHistory();
 
                             break;
-                        case 5:
+                        case PlayMenu.STOP_GAME:
                             // Конец игры
                             break;
                     }
-                } while (choice != 5);
+                } while (choice != PlayMenu.STOP_GAME);
             }
-        } while (userChoice != this.EXIT);
+        } while (userChoice != MainMenu.EXIT_GAME);
     }
 
     public void displayMainMenu() {
@@ -170,5 +167,18 @@ public class GamePlay {
         }
 
         return inputInt;
+    }
+
+    public static class MainMenu {
+        public final static int START_GAME = 1;
+        public final static int EXIT_GAME = 2;
+    }
+
+    public static class PlayMenu {
+        public final static int DO_TURN = 1;
+        public final static int SHOW_ENEMY_FIELD = 2;
+        public final static int SHOW_MY_FIELD = 3;
+        public final static int SHOW_HISTORY = 4;
+        public final static int STOP_GAME = 5;
     }
 }
